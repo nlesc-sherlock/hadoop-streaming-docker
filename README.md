@@ -30,6 +30,8 @@ yarn jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar \
 ## With docker
 
 
+FIXME: the docker socket should be world writeable, until we figure out what the username is of a mapper job
+
 ```
 yarn jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar \
 -mapper mapper.sh -file mapper.sh \
