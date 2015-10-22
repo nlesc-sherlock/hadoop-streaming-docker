@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker run mapred-python reducer.py
+/bin/docker run -i mapred-python reducer.py

@@ -1,3 +1,2 @@
 #!/bin/sh
-
-docker run mapred-python mapper.py
+/bin/docker run -i mapred-python mapper.py
