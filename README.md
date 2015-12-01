@@ -29,8 +29,7 @@ yarn jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar \
 
 ## With docker
 
-
-FIXME: the docker socket should be world writeable, until we figure out what the username is of a mapper job
+Make sure the yarn user is a member of the docker posix group and the yarn services have been restarted (so the posix group cache is cleared)
 
 ```
 yarn jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar \
