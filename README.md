@@ -4,6 +4,16 @@ Run Python hadoop streaming example by running mapper/reducer inside docker cont
 
 Python code taken from http://www.michael-noll.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/
 
+This setup will work under the following conditions:
+ * The docker container will be started by the yarn user, so make sure that one is part of the docker group. Also the /var/run/docker.sock should be group writeable.
+ * stdin and stdout of the docker container are connected to those of the hadoop mapper; this can be done by using docker run -i, see the mapper.sh script.
+ * The container should operate on a line-by-line basis: read something from stdin, and write a response to stdout, until an end-of-file is encounterd, or the pipe is closed. You can not read the whole of stdin, do processing, and write to stdout.
+
+http://stackoverflow.com/questions/11041253/set-hadoop-system-user-for-client-embedded-in-java-webapp
+
+  970  runuser hdfs -s /bin/bash /bin/bash -c "hadoop fs -chown jiska /usr/jiska"
+  971  runuser hdfs -s /bin/bash /bin/bash -c "hadoop fs -chown jiska /user/jiska"
+
 # Build
 
 ```
@@ -29,7 +39,6 @@ yarn jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar \
 
 ## With docker
 
-Make sure the yarn user is a member of the docker posix group and the yarn services have been restarted (so the posix group cache is cleared)
 
 ```
 yarn jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar \
